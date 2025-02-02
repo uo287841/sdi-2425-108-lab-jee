@@ -12,29 +12,39 @@
     <%@ page language="java" import="com.uniovi.sdi.* , java.util.List" %>
 </head>
 <body>
+<jsp:useBean id="counter" class="com.uniovi.sdi.Counter"/>
+<jsp:setProperty name="counter" property="increase" value="1"/>
+
+<%-- Cambiado por el Bean
 <%
-    Integer counter = (Integer) application.getAttribute("counter");
-    if (counter == null) {
-        counter = 0;
-    }
-    application.setAttribute("counter", counter + 1);
+ Integer counter = (Integer) application.getAttribute("counter");
+ if (counter == null) {
+ counter = 0;
+ }
+ application.setAttribute("counter", counter + 1);
 %>
+--%>
+
 <!-- Barra de Navegación superior -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="collapse navbar-collapse" id="my-navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-                <a class="nav-link" href="AddToShoppingCart">Carrito<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="AddToShoppingCart">Carrito<span
+                        class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="login.jsp">Login<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../login.jsp">Login<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="admin.jsp">Administrar productos<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../admin.jsp">Administrar productos<span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <div class="nav navbar-right">
-            <%=counter%> Visitas
+            <!-- cambiado por el bean -->
+            <%-- <%=counter%>Visitas --%>
+            <jsp:getProperty name="counter" property="total"/>
+            Visitas
         </div>
     </div>
 </nav>
