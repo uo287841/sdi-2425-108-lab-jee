@@ -2,13 +2,7 @@ package com.uniovi.sdi;
 
 // Responde con post
 
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-
-import java.util.HashMap;
-
+/*
 @WebServlet(name = "DeleteFromShoppingCart", value = "/DeleteFromShoppingCart")
 public class DeleteFromShoppingCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

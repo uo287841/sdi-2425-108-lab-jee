@@ -1,4 +1,4 @@
-%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -14,8 +14,8 @@
 </head>
 <body>
 <%
-        String user = (String) request.getSession().getAttribute("user");
-        System.out.println("Usuario en sesión: " + user);
+    String user = (String) request.getSession().getAttribute("user");
+    System.out.println("Usuario en sesión: " + user);
     if (user == null || !user.equals("admin")) {
         // No hay usuario o no es admin
         response.sendRedirect("login.jsp");
@@ -23,7 +23,7 @@
 %>
 <!-- Contenido -->
 <div class="container" id="contenedor-principal">
-    <h2>Administrar</h2>
+    <h2>Administrador</h2>
 </div>
 </body>
 </html>
