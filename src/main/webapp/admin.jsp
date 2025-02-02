@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ page language="java" import="com.uniovi.sdi.*" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,22 +14,36 @@
             type="application/javascript"></script>
 </head>
 <body>
+<%-- Cambiado por las etiquetas JSTL
 <%
     String user = (String) request.getSession().getAttribute("user");
     System.out.println("Usuario en sesión: " + user);
-    if (user == null || !user.equals("admin")) {
+    if (user == null || user.equals("admin") == false) {
+        // No hay usuario o no es admin
         response.sendRedirect("login.jsp");
     }
 %>
+--%>
+<c:if test="${sessionScope.user != 'admin'}">
+    <c:redirect url="/login.jsp"/>
+</c:if>
 
 <jsp:useBean id="product" class="com.uniovi.sdi.Product"/>
 <jsp:setProperty name="product" property="*"/>
+
+<%-- Cambiado por las etiquetas JSTL
 <%
     if (product.getName() != null) {
         new ProductsService().setNewProduct(product);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 %>
+--%>
+<c:if test="${product.name != null}">
+    <jsp:useBean id="productsService" class="com.uniovi.sdi.ProductsService"/>
+    <jsp:setProperty name="productsService" property="newProduct" value="${product}"/>
+    <c:redirect url="/index.jsp"/>
+</c:if>
 
 <!-- Contenido -->
 <div class="container" id="contenedor-principal">
