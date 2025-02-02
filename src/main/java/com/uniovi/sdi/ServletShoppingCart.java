@@ -8,11 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 @WebServlet(name = "ServletShoppingCart", value = "/AddToShoppingCart")
 public class ServletShoppingCart extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
@@ -28,15 +28,20 @@ public class ServletShoppingCart extends HttpServlet {
         if (product != null) {
             addToShoppingCart(cart, product);
         }
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<HTML>");
-        out.println("<HEAD><TITLE>Tienda SDI: Cesta de la compra</TITLE></HEAD>");
-        out.println("<BODY>");
-        out.println(shoppingCartToHtml(cart) + "<br>");
-        out.println("<a href=\"shop.html\">Volver</a></BODY></HTML>");
+        // Retornar la vista con parámetro "selectedItems"
+        request.setAttribute("selectedItems", cart);
+        getServletContext().getRequestDispatcher("/cart.jsp").forward(request, response);
+ /* Eliminado al aplicar el patrón MVC
+ response.setCharacterEncoding("UTF-8");
+ response.setContentType("text/html");
+ PrintWriter out = response.getWriter();
+ out.println("<HTML>");
+ out.println("<HEAD><TITLE>Tienda SDI: Cesta de la compra</TITLE></HEAD>");
+ out.println("<BODY>");
+ out.println(shoppingCartToHtml(cart) + "<br>");
+ out.println("<a href=\"index.jsp\">Volver</a></BODY></HTML>");*/
     }
+
 
     private void addToShoppingCart(HashMap<String, Integer> cart, String productKey) {
         if (cart.get(productKey) == null) {
